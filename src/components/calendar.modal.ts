@@ -23,32 +23,44 @@ const NUM_OF_MONTHS_TO_CREATE = 6;
   styleUrls: ['./calendar.modal.scss'],
   template: `
     <ion-header>
-      <ion-toolbar [color]="_d.color || ''">
+      <ion-toolbar [color]="_d?.color || undefined">
         <ion-buttons slot="start">
-          <ion-button type="button" slot="icon-only" fill="clear" (click)="onCancel()">
-            <span *ngIf="_d.closeLabel !== '' && !_d.closeIcon">{{ _d.closeLabel }}</span>
-            <ion-icon *ngIf="_d.closeIcon" name="close"></ion-icon>
+          <ion-button type="button" fill="clear" (click)="onCancel()"
+                      [attr.aria-label]="_d?.closeLabel || 'Close'">
+            <ng-container *ngIf="_d?.closeLabel !== '' && !_d?.closeIcon; else closeIconTpl">
+              {{ _d?.closeLabel }}
+            </ng-container>
+            <ng-template #closeIconTpl>
+              <ion-icon name="close"></ion-icon>
+            </ng-template>
           </ion-button>
         </ion-buttons>
 
-        <ion-title>{{ _d.title }}</ion-title>
+        <ion-title>{{ _d?.title }}</ion-title>
 
         <ion-buttons slot="end">
-          <ion-button type="button" *ngIf="!!_d.clearLabel" fill="clear" [disabled]="!canClear()" (click)="clear()">
-            <span *ngIf="_d.clearLabel !== ''">{{ _d.clearLabel }}</span>
+          <ion-button type="button" fill="clear"
+                      *ngIf="!!_d?.clearLabel"
+                      [disabled]="!canClear()"
+                      (click)="clear()">
+            <span *ngIf="_d?.clearLabel !== ''">{{ _d?.clearLabel }}</span>
           </ion-button>
-          <ion-button
-            type="button"
-            slot="icon-only"
-            *ngIf="!_d.autoDone"
-            fill="clear"
-            [disabled]="!canDone()"
-            (click)="done()">
-            <span *ngIf="_d.doneLabel !== '' && !_d.doneIcon">{{ _d.doneLabel }}</span>
-            <ion-icon *ngIf="_d.doneIcon" name="checkmark"></ion-icon>
+
+          <ion-button type="button" fill="clear"
+                      *ngIf="!_d?.autoDone"
+                      [disabled]="!canDone()"
+                      (click)="done()"
+                      [attr.aria-label]="_d?.doneLabel || 'Done'">
+            <ng-container *ngIf="_d?.doneLabel !== '' && !_d?.doneIcon; else doneIconTpl">
+              {{ _d?.doneLabel }}
+            </ng-container>
+            <ng-template #doneIconTpl>
+              <ion-icon name="checkmark"></ion-icon>
+            </ng-template>
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
+
 
       <ng-content select="[sub-header]"></ng-content>
 
