@@ -1,6 +1,6 @@
 {
   "name": "ion7-calendar",
-  "version": "3.6.29",
+  "version": "3.6.30",
   "description": "A date picker component for ionic 7 ",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "cd ./dev && npm start",
-    "clean:dist": "rm -rf dist",
+    "clean:dist": "rimraf dist",
     "demo:link": "npm link && cd ./demo && npm link ion2-calendar",
     "demo:serve": "cd ./demo && ionic serve",
     "build": "run-s clean:dist build:copy-sources build:compile-scss build:ts",
@@ -17,7 +17,6 @@
     "build:copy-sources": "gulp copy-sources",
     "build:compile-scss": "gulp copy-scss && gulp rename-scss && gulp clean-scss",
     "test": "echo \"Error: no test specified\"",
-    "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "packagr": "ng-packagr -p package.json",
     "prepublishOnly": "npm run build"
   },
@@ -31,7 +30,6 @@
     "@angular/compiler-cli": "15.2.8",
     "@angular/core": "15.2.8",
     "@angular/forms": "15.2.8",
-    "@angular/http": "7.1.4",
     "@angular/platform-browser": "15.2.8",
     "@angular/platform-browser-dynamic": "15.2.8",
     "@angular/router": "15.2.8",
@@ -45,11 +43,9 @@
     "moment": "2.29.4",
     "ng-packagr": "15.2.2",
     "npm-run-all": "4.1.5",
+    "rimraf": "^6.0.1",
     "rxjs": "7.8.1",
     "sass": "^1.62.1",
-    "tsickle": "0.46.3",
-    "tslint": "4.5.1",
-    "tslint-eslint-rules": "4.1.1",
     "typescript": "4.9.5",
     "zone.js": "0.13.0"
   },
